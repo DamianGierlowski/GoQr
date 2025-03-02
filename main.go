@@ -46,6 +46,12 @@ func main() {
 
 	// Barcode generation API
 	r.POST("/api/barcode", func(c *gin.Context) {
+		apiKey := c.GetHeader("X-RapidAPI-Key")
+		if apiKey != os.Getenv("API-KEY") {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			return
+		}
+
 		var request struct {
 			Text string `json:"text" binding:"required"`
 		}
