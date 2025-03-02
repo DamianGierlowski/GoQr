@@ -17,7 +17,7 @@ func main() {
 	// QR Code generation endpoint
 	r.POST("/api/qrcode", func(c *gin.Context) {
 
-		apiKey := c.GetHeader("X-API-Key")
+		apiKey := c.GetHeader("X-RapidAPI-Key")
 		if apiKey != os.Getenv("API-KEY") {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 			return
