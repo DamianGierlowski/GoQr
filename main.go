@@ -17,7 +17,7 @@ func main() {
 	// QR Code generation endpoint
 	r.POST("/api/qrcode", func(c *gin.Context) {
 
-		apiKey := c.GetHeader("X-RapidAPI-Key")
+		apiKey := c.GetHeader("X-RapidAPI-Proxy-Secret")
 		if apiKey != os.Getenv("API-KEY") {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 			return
@@ -46,7 +46,7 @@ func main() {
 
 	// Barcode generation API
 	r.POST("/api/barcode", func(c *gin.Context) {
-		apiKey := c.GetHeader("X-RapidAPI-Key")
+		apiKey := c.GetHeader("X-RapidAPI-Proxy-Secret")
 		if apiKey != os.Getenv("API-KEY") {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 			return
